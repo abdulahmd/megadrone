@@ -34,6 +34,37 @@ style.textContent = `
   @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
   @keyframes spin { to{transform:rotate(360deg)} }
   @keyframes drone-hover { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-12px) rotate(1deg)} }
+
+  /* Responsive Utility Classes */
+  @media (max-width: 768px) {
+    .hide-mobile { display: none !important; }
+    .hero-split { flex-direction: column !important; text-align: center; gap: 32px !important; }
+    .hero-metrics { justify-content: center !important; }
+    .grid-3 { grid-template-columns: 1fr !important; }
+    .grid-split { grid-template-columns: 1fr !important; }
+    .app-container { padding: 24px 16px !important; }
+    .research-layout { flex-direction: column !important; height: auto !important; }
+    .research-sidebar { width: 100% !important; border-right: none !important; border-bottom: 1px solid var(--border); display: flex; overflow-x: auto; padding: 12px 16px !important; }
+    .research-sidebar button { display: inline-block !important; width: auto !important; border-left: none !important; border-bottom: 2px solid transparent; padding: 8px 16px !important; white-space: nowrap; }
+    .research-sidebar button.active { border-bottom-color: var(--accent) !important; background: none !important; }
+    .research-content { padding: 24px 16px !important; }
+    .task-row { grid-template-columns: 1fr !important; gap: 16px !important; }
+    .task-status-col { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .about-header { flex-direction: column !important; gap: 16px !important; }
+    h1 { font-size: 32px !important; }
+    h2 { font-size: 22px !important; }
+    .nav-container { padding: 0 16px !important; overflow-x: auto; }
+    .nav-logo-wrap { padding-right: 12px !important; margin-right: 12px !important; }
+    .nav-logo-text { display: none; }
+    .nav-tabs { flex: 1; display: flex; min-width: max-content; }
+    .nav-auth { margin-left: auto !important; }
+    .filter-row { flex-wrap: wrap !important; }
+    .about-team-grid { grid-template-columns: 1fr 1fr !important; }
+    .login-card { width: 100% !important; max-width: 340px !important; }
+  }
+  @media (max-width: 480px) {
+    .about-team-grid { grid-template-columns: 1fr !important; }
+  }
 `;
 document.head.appendChild(style);
 
@@ -70,31 +101,31 @@ const INIT_MEMBERS = [
 const DroneSVG = ({ size = 200 }) => (
   <svg width={size} height={size} viewBox="0 0 200 200" style={{ animation: "drone-hover 3s ease-in-out infinite", filter: "drop-shadow(0 0 20px rgba(0,212,255,0.6))" }}>
     {/* Arms */}
-    <line x1="100" y1="100" x2="40" y2="40" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8"/>
-    <line x1="100" y1="100" x2="160" y2="40" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8"/>
-    <line x1="100" y1="100" x2="40" y2="160" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8"/>
-    <line x1="100" y1="100" x2="160" y2="160" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8"/>
+    <line x1="100" y1="100" x2="40" y2="40" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
+    <line x1="100" y1="100" x2="160" y2="40" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
+    <line x1="100" y1="100" x2="40" y2="160" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
+    <line x1="100" y1="100" x2="160" y2="160" stroke="#00d4ff" strokeWidth="4" strokeLinecap="round" opacity=".8" />
     {/* Motor mounts */}
-    {[[40,40],[160,40],[40,160],[160,160]].map(([x,y],i) => (
+    {[[40, 40], [160, 40], [40, 160], [160, 160]].map(([x, y], i) => (
       <g key={i}>
-        <circle cx={x} cy={y} r="14" fill="none" stroke="#00d4ff" strokeWidth="2" opacity=".9"/>
-        <circle cx={x} cy={y} r="8" fill="#0d1117" stroke="#00ff9d" strokeWidth="1.5"/>
-        <circle cx={x} cy={y} r="3" fill="#00ff9d"/>
+        <circle cx={x} cy={y} r="14" fill="none" stroke="#00d4ff" strokeWidth="2" opacity=".9" />
+        <circle cx={x} cy={y} r="8" fill="#0d1117" stroke="#00ff9d" strokeWidth="1.5" />
+        <circle cx={x} cy={y} r="3" fill="#00ff9d" />
         {/* Prop blur */}
-        <ellipse cx={x} cy={y} rx="20" ry="3" fill="none" stroke="#00d4ff" strokeWidth="1" opacity=".3"/>
-        <ellipse cx={x} cy={y} rx="3" ry="20" fill="none" stroke="#00d4ff" strokeWidth="1" opacity=".3"/>
+        <ellipse cx={x} cy={y} rx="20" ry="3" fill="none" stroke="#00d4ff" strokeWidth="1" opacity=".3" />
+        <ellipse cx={x} cy={y} rx="3" ry="20" fill="none" stroke="#00d4ff" strokeWidth="1" opacity=".3" />
       </g>
     ))}
     {/* Body */}
-    <rect x="82" y="82" width="36" height="36" rx="6" fill="#141b24" stroke="#00d4ff" strokeWidth="2"/>
-    <rect x="88" y="88" width="24" height="24" rx="4" fill="#1a2232"/>
-    <circle cx="100" cy="100" r="6" fill="#00d4ff" opacity=".9"/>
-    <circle cx="100" cy="100" r="3" fill="#e8f4ff"/>
+    <rect x="82" y="82" width="36" height="36" rx="6" fill="#141b24" stroke="#00d4ff" strokeWidth="2" />
+    <rect x="88" y="88" width="24" height="24" rx="4" fill="#1a2232" />
+    <circle cx="100" cy="100" r="6" fill="#00d4ff" opacity=".9" />
+    <circle cx="100" cy="100" r="3" fill="#e8f4ff" />
     {/* Landing gear */}
-    <line x1="85" y1="118" x2="75" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round"/>
-    <line x1="115" y1="118" x2="125" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round"/>
-    <line x1="68" y1="135" x2="82" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round"/>
-    <line x1="118" y1="135" x2="132" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round"/>
+    <line x1="85" y1="118" x2="75" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round" />
+    <line x1="115" y1="118" x2="125" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round" />
+    <line x1="68" y1="135" x2="82" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round" />
+    <line x1="118" y1="135" x2="132" y2="135" stroke="#2a3a52" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
@@ -119,8 +150,8 @@ const CatBadge = ({ cat }) => {
   );
 };
 
-const Card = ({ children, style: s = {} }) => (
-  <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: "20px 24px", ...s }}>
+const Card = ({ children, style: s = {}, className = "" }) => (
+  <div className={className} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: "20px 24px", ...s }}>
     {children}
   </div>
 );
@@ -148,7 +179,7 @@ const Select = ({ label, options, ...props }) => (
   </div>
 );
 
-const Btn = ({ children, variant = "primary", ...props }) => {
+const Btn = ({ children, variant = "primary", className = "", ...props }) => {
   const styles = {
     primary: { background: "var(--accent)", color: "#000", fontWeight: 600 },
     ghost: { background: "transparent", color: "var(--accent)", border: "1px solid var(--accent)" },
@@ -156,7 +187,7 @@ const Btn = ({ children, variant = "primary", ...props }) => {
     success: { background: "var(--accent3)", color: "#000", fontWeight: 600 },
   };
   return (
-    <button {...props} style={{ fontFamily: "'Share Tech Mono'", fontSize: 12, padding: "8px 16px", borderRadius: 4, cursor: "pointer", border: "none", letterSpacing: 1, transition: "opacity .2s", ...styles[variant], ...props.style }}
+    <button className={className} {...props} style={{ fontFamily: "'Share Tech Mono'", fontSize: 12, padding: "8px 16px", borderRadius: 4, cursor: "pointer", border: "none", letterSpacing: 1, transition: "opacity .2s", ...styles[variant], ...props.style }}
       onMouseEnter={e => e.currentTarget.style.opacity = ".8"}
       onMouseLeave={e => e.currentTarget.style.opacity = "1"}
     >
@@ -177,13 +208,13 @@ const LoginPage = ({ onLogin }) => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "var(--bg)", position: "relative", overflow: "hidden" }}>
+    <div className="login-container" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "var(--bg)", position: "relative", overflow: "hidden", padding: "0 16px" }}>
       {/* Background grid */}
       <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)", backgroundSize: "50px 50px", opacity: .15 }} />
       {/* Scan line */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, transparent, var(--accent), transparent)", animation: "scan 4s linear infinite", opacity: .4 }} />
 
-      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 40, animation: "fadeUp .6s ease" }}>
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 40, animation: "fadeUp .6s ease", width: "100%" }}>
         <DroneSVG size={120} />
         <div style={{ textAlign: "center" }}>
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--accent)", letterSpacing: 4, marginBottom: 8 }}>AIAA UNDERGRADUATE CHAPTER</div>
@@ -191,7 +222,7 @@ const LoginPage = ({ onLogin }) => {
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--text3)", letterSpacing: 3, marginTop: 4 }}>MISSION CONTROL — v0.1 MVP</div>
         </div>
 
-        <Card style={{ width: 340, display: "flex", flexDirection: "column", gap: 20 }}>
+        <Card className="login-card" style={{ width: 340, display: "flex", flexDirection: "column", gap: 20 }}>
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 12, color: "var(--accent)", letterSpacing: 2 }}>ACCESS TERMINAL</div>
           <Input
             label="Team Password"
@@ -219,18 +250,20 @@ const LoginPage = ({ onLogin }) => {
 const Nav = ({ tab, setTab, isTeam, onLogout }) => {
   const tabs = ["Home", "Research", "Calendar", "Blog", "About"];
   return (
-    <nav style={{ background: "var(--bg2)", borderBottom: "1px solid var(--border)", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, position: "sticky", top: 0, zIndex: 100 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginRight: 32, paddingRight: 24, borderRight: "1px solid var(--border)" }}>
-        <div style={{ width: 28, height: 28 }}><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" fill="#00d4ff"/><line x1="14" y1="14" x2="5" y2="5" stroke="#00d4ff" strokeWidth="2"/><line x1="14" y1="14" x2="23" y2="5" stroke="#00d4ff" strokeWidth="2"/><line x1="14" y1="14" x2="5" y2="23" stroke="#00d4ff" strokeWidth="2"/><line x1="14" y1="14" x2="23" y2="23" stroke="#00d4ff" strokeWidth="2"/></svg></div>
-        <span style={{ fontFamily: "'Orbitron'", fontSize: 13, fontWeight: 700, color: "var(--heading)", letterSpacing: 2 }}>AIAA DRONE</span>
+    <nav className="nav-container" style={{ background: "var(--bg2)", borderBottom: "1px solid var(--border)", padding: "0 24px", display: "flex", alignItems: "center", gap: 0, position: "sticky", top: 0, zIndex: 100 }}>
+      <div className="nav-logo-wrap" style={{ display: "flex", alignItems: "center", gap: 10, marginRight: 32, paddingRight: 24, borderRight: "1px solid var(--border)" }}>
+        <div style={{ width: 28, height: 28 }}><svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" fill="#00d4ff" /><line x1="14" y1="14" x2="5" y2="5" stroke="#00d4ff" strokeWidth="2" /><line x1="14" y1="14" x2="23" y2="5" stroke="#00d4ff" strokeWidth="2" /><line x1="14" y1="14" x2="5" y2="23" stroke="#00d4ff" strokeWidth="2" /><line x1="14" y1="14" x2="23" y2="23" stroke="#00d4ff" strokeWidth="2" /></svg></div>
+        <span className="nav-logo-text" style={{ fontFamily: "'Orbitron'", fontSize: 13, fontWeight: 700, color: "var(--heading)", letterSpacing: 2 }}>AIAA DRONE</span>
       </div>
-      {tabs.map(t => (
-        <button key={t} onClick={() => setTab(t)}
-          style={{ fontFamily: "'Share Tech Mono'", fontSize: 12, letterSpacing: 1, padding: "18px 16px", background: "none", border: "none", color: tab === t ? "var(--accent)" : "var(--text2)", cursor: "pointer", borderBottom: tab === t ? "2px solid var(--accent)" : "2px solid transparent", transition: "color .2s" }}
-        >{t.toUpperCase()}</button>
-      ))}
-      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
-        <span style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: isTeam ? "var(--accent3)" : "var(--text3)", letterSpacing: 1 }}>
+      <div className="nav-tabs">
+        {tabs.map(t => (
+          <button key={t} onClick={() => setTab(t)}
+            style={{ fontFamily: "'Share Tech Mono'", fontSize: 12, letterSpacing: 1, padding: "18px 16px", background: "none", border: "none", color: tab === t ? "var(--accent)" : "var(--text2)", cursor: "pointer", borderBottom: tab === t ? "2px solid var(--accent)" : "2px solid transparent", transition: "color .2s" }}
+          >{t.toUpperCase()}</button>
+        ))}
+      </div>
+      <div className="nav-auth" style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
+        <span className="hide-mobile" style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: isTeam ? "var(--accent3)" : "var(--text3)", letterSpacing: 1 }}>
           {isTeam ? "● TEAM" : "○ GUEST"}
         </span>
         <Btn variant="ghost" onClick={onLogout} style={{ fontSize: 10, padding: "5px 12px" }}>LOGOUT</Btn>
@@ -246,29 +279,31 @@ const HomePage = ({ tasks, posts }) => {
   const next = tasks.find(t => t.status !== "Completed");
 
   return (
-    <div style={{ padding: "40px 32px", maxWidth: 1100, margin: "0 auto", animation: "fadeUp .5s ease" }}>
+    <div className="app-container" style={{ padding: "40px 32px", maxWidth: 1100, margin: "0 auto", animation: "fadeUp .5s ease" }}>
       {/* Hero */}
-      <div style={{ display: "flex", alignItems: "center", gap: 48, marginBottom: 48 }}>
+      <div className="hero-split" style={{ display: "flex", alignItems: "center", gap: 48, marginBottom: 48 }}>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--accent)", letterSpacing: 4, marginBottom: 12 }}>AIAA UNDERGRADUATE DRONE PROJECT</div>
-          <h1 style={{ fontFamily: "'Orbitron'", fontSize: 42, fontWeight: 900, color: "var(--heading)", lineHeight: 1.15, marginBottom: 16 }}>AUTONOMOUS<br/>FLIGHT<br/><span style={{ color: "var(--accent)" }}>SYSTEMS</span></h1>
-          <p style={{ color: "var(--text2)", lineHeight: 1.7, maxWidth: 420, fontSize: 15 }}>
+          <h1 style={{ fontFamily: "'Orbitron'", fontSize: 42, fontWeight: 900, color: "var(--heading)", lineHeight: 1.15, marginBottom: 16 }}>AUTONOMOUS<br className="hide-mobile" />FLIGHT<br className="hide-mobile" /><span style={{ color: "var(--accent)" }}>SYSTEMS</span></h1>
+          <p style={{ color: "var(--text2)", lineHeight: 1.7, maxWidth: 420, fontSize: 15, margin: "0 auto" }}>
             Designing, building, and flying a full-scale 6×8 ft autonomous drone for research, competition, and real-world mission scenarios.
           </p>
-          <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
+          <div className="hero-metrics" style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--accent3)", animation: "pulse-glow 2s ease infinite" }} />
             <span style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--accent3)", letterSpacing: 2 }}>PHASE: FRAME ASSEMBLY</span>
           </div>
         </div>
-        <DroneSVG size={220} />
+        <div className="hero-drone">
+          <DroneSVG size={220} />
+        </div>
       </div>
 
       {/* Metrics row */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
+      <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
         {[
           { label: "Completion", value: `${pct}%`, sub: `${completed}/${tasks.length} tasks done` },
-          { label: "Next Milestone", value: next?.title?.split(" ").slice(0,3).join(" ") || "TBD", sub: next ? `Due ${next.dueDate}` : "" },
-          { label: "Latest Post", value: posts[0]?.date || "—", sub: posts[0]?.title?.slice(0,30) + "…" },
+          { label: "Next Milestone", value: next?.title?.split(" ").slice(0, 3).join(" ") || "TBD", sub: next ? `Due ${next.dueDate}` : "" },
+          { label: "Latest Post", value: posts[0]?.date || "—", sub: posts[0]?.title?.slice(0, 30) + "…" },
         ].map(m => (
           <Card key={m.label}>
             <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: "var(--text2)", letterSpacing: 2, marginBottom: 8 }}>{m.label.toUpperCase()}</div>
@@ -290,12 +325,12 @@ const HomePage = ({ tasks, posts }) => {
       </Card>
 
       {/* Recent tasks */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+      <div className="grid-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
         <Card>
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--text2)", letterSpacing: 2, marginBottom: 16 }}>ACTIVE TASKS</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {tasks.filter(t => t.status !== "Completed").slice(0, 3).map(t => (
-              <div key={t.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
+              <div key={t.id} style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 8, padding: "8px 0", borderBottom: "1px solid var(--border)" }}>
                 <div>
                   <div style={{ fontSize: 13, color: "var(--heading)", marginBottom: 4 }}>{t.title}</div>
                   <CatBadge cat={t.category} />
@@ -331,24 +366,25 @@ const ResearchTab = ({ sections, setSections, isTeam }) => {
 
   const startEdit = () => { setDraft({ ...sec }); setEditing(true); };
   const save = () => {
-    setSections(sections.map(s => s.id === active ? { ...draft, lastEdited: new Date().toISOString().slice(0,10), editedBy: "You" } : s));
+    setSections(sections.map(s => s.id === active ? { ...draft, lastEdited: new Date().toISOString().slice(0, 10), editedBy: "You" } : s));
     setEditing(false);
   };
 
   return (
-    <div style={{ display: "flex", height: "calc(100vh - 56px)", animation: "fadeUp .5s ease" }}>
+    <div className="research-layout" style={{ display: "flex", height: "calc(100vh - 56px)", animation: "fadeUp .5s ease" }}>
       {/* Sidebar */}
-      <div style={{ width: 220, background: "var(--bg2)", borderRight: "1px solid var(--border)", padding: "24px 0", overflowY: "auto" }}>
-        <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: "var(--text3)", letterSpacing: 2, padding: "0 20px 16px" }}>SECTIONS</div>
+      <div className="research-sidebar" style={{ width: 220, background: "var(--bg2)", borderRight: "1px solid var(--border)", padding: "24px 0", overflowY: "auto" }}>
+        <div className="hide-mobile" style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: "var(--text3)", letterSpacing: 2, padding: "0 20px 16px" }}>SECTIONS</div>
         {sections.map(s => (
           <button key={s.id} onClick={() => { setActive(s.id); setEditing(false); }}
+            className={active === s.id ? "active" : ""}
             style={{ display: "block", width: "100%", textAlign: "left", padding: "12px 20px", background: active === s.id ? "var(--surface)" : "none", borderLeft: active === s.id ? "2px solid var(--accent)" : "2px solid transparent", border: "none", color: active === s.id ? "var(--accent)" : "var(--text2)", fontFamily: "'Share Tech Mono'", fontSize: 12, cursor: "pointer", letterSpacing: .5 }}
           >{s.title}</button>
         ))}
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, padding: "32px 40px", overflowY: "auto" }}>
+      <div className="research-content" style={{ flex: 1, padding: "32px 40px", overflowY: "auto" }}>
         {sec && (
           <>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
@@ -371,9 +407,9 @@ const ResearchTab = ({ sections, setSections, isTeam }) => {
               <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.8, color: "var(--text)", fontSize: 14, fontFamily: "'Barlow'" }}>
                 {sec.content.split("\n").map((line, i) => {
                   if (line.startsWith("## ")) return <h3 key={i} style={{ fontFamily: "'Orbitron'", fontSize: 16, color: "var(--accent)", marginTop: 20, marginBottom: 8 }}>{line.slice(3)}</h3>;
-                  if (line.startsWith("**") && line.endsWith("**")) return <strong key={i} style={{ color: "var(--heading)", display: "block", marginTop: 12 }}>{line.slice(2,-2)}</strong>;
+                  if (line.startsWith("**") && line.endsWith("**")) return <strong key={i} style={{ color: "var(--heading)", display: "block", marginTop: 12 }}>{line.slice(2, -2)}</strong>;
                   if (line.startsWith("- ")) return <div key={i} style={{ paddingLeft: 16, color: "var(--text2)" }}>• {line.slice(2)}</div>;
-                  return <span key={i}>{line}<br/></span>;
+                  return <span key={i}>{line}<br /></span>;
                 })}
               </div>
             )}
@@ -405,21 +441,21 @@ const CalendarTab = ({ tasks, setTasks, isTeam }) => {
   const filtered = filter === "All" ? tasks : tasks.filter(t => t.category === filter);
 
   return (
-    <div style={{ padding: "32px", maxWidth: 1000, margin: "0 auto", animation: "fadeUp .5s ease" }}>
+    <div className="app-container" style={{ padding: "32px", maxWidth: 1000, margin: "0 auto", animation: "fadeUp .5s ease" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
         <h2 style={{ fontFamily: "'Orbitron'", fontSize: 24, fontWeight: 700, color: "var(--heading)" }}>TASK TRACKER</h2>
         {isTeam && <Btn onClick={() => setShowForm(!showForm)}>+ NEW TASK</Btn>}
       </div>
 
       {showForm && (
-        <Card style={{ marginBottom: 24, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-          <Input label="Task Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Task name..." style={{ gridColumn: "span 2" }} />
-          <Textarea label="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} style={{ minHeight: 70, gridColumn: "span 2" }} />
+        <Card className="grid-split" style={{ marginBottom: 24, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <Input label="Task Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Task name..." style={{ gridColumn: "1 / -1" }} />
+          <Textarea label="Description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} style={{ minHeight: 70, gridColumn: "1 / -1" }} />
           <Input label="Due Date" type="date" value={form.dueDate} onChange={e => setForm({ ...form, dueDate: e.target.value })} />
           <Input label="Assigned To" value={form.assignedTo} onChange={e => setForm({ ...form, assignedTo: e.target.value })} placeholder="Name..." />
-          <Select label="Category" options={["Mechanical","Electrical","Software"]} value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} />
-          <Select label="Status" options={["Not Started","In Progress","Completed"]} value={form.status} onChange={e => setForm({ ...form, status: e.target.value })} />
-          <div style={{ gridColumn: "span 2", display: "flex", gap: 10 }}>
+          <Select label="Category" options={["Mechanical", "Electrical", "Software"]} value={form.category} onChange={e => setForm({ ...form, category: e.target.value })} />
+          <Select label="Status" options={["Not Started", "In Progress", "Completed"]} value={form.status} onChange={e => setForm({ ...form, status: e.target.value })} />
+          <div style={{ gridColumn: "1 / -1", display: "flex", gap: 10 }}>
             <Btn onClick={addTask}>CREATE TASK</Btn>
             <Btn variant="ghost" onClick={() => setShowForm(false)}>CANCEL</Btn>
           </div>
@@ -427,7 +463,7 @@ const CalendarTab = ({ tasks, setTasks, isTeam }) => {
       )}
 
       {/* Filters */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+      <div className="filter-row" style={{ display: "flex", gap: 8, marginBottom: 20 }}>
         {cats.map(c => (
           <button key={c} onClick={() => setFilter(c)}
             style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, padding: "6px 14px", borderRadius: 3, border: "1px solid", borderColor: filter === c ? "var(--accent)" : "var(--border)", background: filter === c ? "rgba(0,212,255,.1)" : "none", color: filter === c ? "var(--accent)" : "var(--text2)", cursor: "pointer", letterSpacing: 1 }}>
@@ -442,9 +478,9 @@ const CalendarTab = ({ tasks, setTasks, isTeam }) => {
       {/* Task list */}
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {filtered.map(t => (
-          <Card key={t.id} style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 16, alignItems: "center" }}>
+          <Card key={t.id} className="task-row" style={{ display: "grid", gridTemplateColumns: "1fr auto auto", gap: 16, alignItems: "center" }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, marginBottom: 6 }}>
                 <span style={{ fontSize: 14, color: "var(--heading)", fontWeight: 500 }}>{t.title}</span>
                 <CatBadge cat={t.category} />
               </div>
@@ -453,15 +489,17 @@ const CalendarTab = ({ tasks, setTasks, isTeam }) => {
                 {t.dueDate && `DUE ${t.dueDate}`}{t.assignedTo && ` • ${t.assignedTo}`}
               </div>
             </div>
-            {isTeam ? (
-              <select value={t.status} onChange={e => updateStatus(t.id, e.target.value)}
-                style={{ background: "var(--bg3)", border: "1px solid var(--border)", borderRadius: 3, padding: "4px 8px", color: "var(--text)", fontFamily: "'Share Tech Mono'", fontSize: 11, cursor: "pointer" }}>
-                {["Not Started","In Progress","Completed"].map(s => <option key={s}>{s}</option>)}
-              </select>
-            ) : (
-              <StatusBadge status={t.status} />
-            )}
-            {isTeam && <Btn variant="danger" onClick={() => deleteTask(t.id)} style={{ padding: "5px 10px", fontSize: 10 }}>✕</Btn>}
+            <div className="task-status-col">
+              {isTeam ? (
+                <select value={t.status} onChange={e => updateStatus(t.id, e.target.value)}
+                  style={{ background: "var(--bg3)", border: "1px solid var(--border)", borderRadius: 3, padding: "4px 8px", color: "var(--text)", fontFamily: "'Share Tech Mono'", fontSize: 11, cursor: "pointer" }}>
+                  {["Not Started", "In Progress", "Completed"].map(s => <option key={s}>{s}</option>)}
+                </select>
+              ) : (
+                <StatusBadge status={t.status} />
+              )}
+              {isTeam && <Btn variant="danger" onClick={() => deleteTask(t.id)} style={{ padding: "5px 10px", fontSize: 10, marginLeft: 16 }}>✕</Btn>}
+            </div>
           </Card>
         ))}
       </div>
@@ -488,7 +526,7 @@ const BlogTab = ({ posts, setPosts, isTeam }) => {
   if (selected) {
     const post = posts.find(p => p.id === selected);
     return (
-      <div style={{ padding: "40px 32px", maxWidth: 760, margin: "0 auto", animation: "fadeUp .4s ease" }}>
+      <div className="app-container" style={{ padding: "40px 32px", maxWidth: 760, margin: "0 auto", animation: "fadeUp .4s ease" }}>
         <button onClick={() => setSelected(null)} style={{ background: "none", border: "none", color: "var(--text2)", fontFamily: "'Share Tech Mono'", fontSize: 11, cursor: "pointer", marginBottom: 24, letterSpacing: 1 }}>← BACK TO UPDATES</button>
         <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 10, color: "var(--text3)", marginBottom: 8 }}>{post.date} • {post.author}</div>
         <h2 style={{ fontFamily: "'Orbitron'", fontSize: 26, fontWeight: 700, color: "var(--heading)", marginBottom: 24, lineHeight: 1.3 }}>{post.title}</h2>
@@ -499,7 +537,7 @@ const BlogTab = ({ posts, setPosts, isTeam }) => {
   }
 
   return (
-    <div style={{ padding: "32px", maxWidth: 900, margin: "0 auto", animation: "fadeUp .5s ease" }}>
+    <div className="app-container" style={{ padding: "32px", maxWidth: 900, margin: "0 auto", animation: "fadeUp .5s ease" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 28 }}>
         <h2 style={{ fontFamily: "'Orbitron'", fontSize: 24, fontWeight: 700, color: "var(--heading)" }}>MISSION UPDATES</h2>
         {isTeam && <Btn onClick={() => setShowForm(!showForm)}>+ NEW POST</Btn>}
@@ -548,8 +586,8 @@ const AboutTab = ({ members, setMembers, isTeam }) => {
   };
 
   return (
-    <div style={{ padding: "40px 32px", maxWidth: 900, margin: "0 auto", animation: "fadeUp .5s ease" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 32 }}>
+    <div className="app-container" style={{ padding: "40px 32px", maxWidth: 900, margin: "0 auto", animation: "fadeUp .5s ease" }}>
+      <div className="about-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 32 }}>
         <div>
           <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--accent)", letterSpacing: 3, marginBottom: 8 }}>ABOUT THE PROJECT</div>
           <h2 style={{ fontFamily: "'Orbitron'", fontSize: 30, fontWeight: 900, color: "var(--heading)" }}>THE TEAM</h2>
@@ -568,7 +606,7 @@ const AboutTab = ({ members, setMembers, isTeam }) => {
       {/* Drone specs */}
       <Card style={{ marginBottom: 28 }}>
         <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--text2)", letterSpacing: 2, marginBottom: 16 }}>VEHICLE SPECIFICATIONS</div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div className="grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {[
             ["Dimensions", "6 ft × 8 ft"],
             ["Configuration", "Quadrotor"],
@@ -588,7 +626,7 @@ const AboutTab = ({ members, setMembers, isTeam }) => {
       {/* Team */}
       <Card>
         <div style={{ fontFamily: "'Share Tech Mono'", fontSize: 11, color: "var(--text2)", letterSpacing: 2, marginBottom: 20 }}>TEAM ROSTER</div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 14 }}>
+        <div className="about-team-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 14 }}>
           {(editMode ? draft : members).map((m, i) => (
             <div key={i} style={{ background: "var(--bg3)", border: "1px solid var(--border)", borderRadius: 6, padding: "14px 16px", position: "relative" }}>
               <div style={{ width: 36, height: 36, borderRadius: "50%", background: "var(--surface2)", border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
@@ -602,7 +640,7 @@ const AboutTab = ({ members, setMembers, isTeam }) => {
         </div>
 
         {editMode && (
-          <div style={{ marginTop: 20, display: "flex", gap: 10, alignItems: "flex-end" }}>
+          <div className="filter-row" style={{ marginTop: 20, display: "flex", gap: 10, alignItems: "flex-end" }}>
             <Input label="Name" value={newMember.name} onChange={e => setNewMember({ ...newMember, name: e.target.value })} placeholder="Full name..." />
             <Input label="Role" value={newMember.role} onChange={e => setNewMember({ ...newMember, role: e.target.value })} placeholder="Role / team..." />
             <Btn variant="success" onClick={addMember} style={{ whiteSpace: "nowrap" }}>ADD</Btn>
@@ -635,11 +673,11 @@ export default function App() {
   return (
     <div style={{ minHeight: "100vh", background: "var(--bg)" }}>
       <Nav tab={tab} setTab={setTab} isTeam={isTeam} onLogout={() => setAuth(null)} />
-      {tab === "Home"     && <HomePage tasks={tasks} posts={posts} />}
+      {tab === "Home" && <HomePage tasks={tasks} posts={posts} />}
       {tab === "Research" && <ResearchTab sections={research} setSections={setResearch} isTeam={isTeam} />}
       {tab === "Calendar" && <CalendarTab tasks={tasks} setTasks={setTasks} isTeam={isTeam} />}
-      {tab === "Blog"     && <BlogTab posts={posts} setPosts={setPosts} isTeam={isTeam} />}
-      {tab === "About"    && <AboutTab members={members} setMembers={setMembers} isTeam={isTeam} />}
+      {tab === "Blog" && <BlogTab posts={posts} setPosts={setPosts} isTeam={isTeam} />}
+      {tab === "About" && <AboutTab members={members} setMembers={setMembers} isTeam={isTeam} />}
     </div>
   );
 }
